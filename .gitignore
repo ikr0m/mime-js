@@ -4,6 +4,7 @@ project/target
 target
 tmp
 .history
+.directory
 dist
 /.idea
 /*.iml
@@ -14,4 +15,3 @@ dist
 /RUNNING_PID
 /.settings
 
-    

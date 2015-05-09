@@ -3,11 +3,8 @@
 <html>
 <head>
     <title>MIME JS</title>
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-    <script src="@routes.Assets.at("javascripts/base64.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/mime-js.js")" type="text/javascript"></script>
-
+    <script src="../dist/base64.js" type="text/javascript"></script>
+    <script src="../dist/mime-js.js" type="text/javascript"></script>
 </head>
 <body>
     <b>Mail obj:</b><div id="mail"></div>
@@ -15,16 +12,15 @@
     <div id="mime"></div>
 
     <script type="application/javascript">
-        // To escape `at` symbol in play framework, we use double `at` in email
         var mail = {
-            "to": "email1@@example.com",
+            "to": "email1@example.com",
             "subject": "Today is rainy",
             "fromName": "John Smith",
-            "from": "john.smith@@mail.com",
+            "from": "john.smith@mail.com",
             "body": "Sample body text",
             "cids": [],
             "attaches" : []
-        }
+        };
         document.getElementById("mail" ).innerText = JSON.stringify(mail);
         document.getElementById("mime" ).innerText = createMimeMessage(mail);
     </script>
