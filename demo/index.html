@@ -3,11 +3,11 @@
 <html>
 <head>
     <title>MIME JS</title>
-    <script src="../dist/base64.js" type="text/javascript"></script>
+    <script src="../src/base64.js" type="text/javascript"></script>
     <script src="../dist/mime-js.js" type="text/javascript"></script>
 </head>
 <body>
-    <b>Mail obj:</b><div id="mail"></div>
+    <b>Mail obj:</b><pre id="mail"></pre>
     <hr>
     <div id="mime"></div>
 
@@ -22,7 +22,7 @@
             "attaches" : []
         };
         document.getElementById("mail" ).innerText = JSON.stringify(mail);
-        document.getElementById("mime" ).innerText = createMimeMessage(mail);
+        document.getElementById("mime" ).innerText = Mime.toMimeTxt(mail);
     </script>
 </body>
 </html>

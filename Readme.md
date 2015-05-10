@@ -1,12 +1,20 @@
 mime-js
 =======
 
-Sometimes you need to create MIME message in browser. With *mime-js* you can create expected MIME message text. This project is created with Play framework, sbt. 
+Sometimes you need to create MIME message in browser. With *mime-js* you can create expected MIME message text.
+
+Install
+-------
+
+Run from terminal:
+
+`npm install`
+`gulp`
 
 Usage
 -----
 
-Call **createMimeMessage** function with *mail* object:
+Call **Mime.toMimeTxt** function with *mail* object:
 
 ```javascript  
 var mail = {  
@@ -58,8 +66,3 @@ PGRpdj5TYW1wbGUgYm9keSB0ZXh0PC9kaXY+
 
 **cids** - For inline images  
 **attaches** - any file in base64 format
-
-You may need to look into [mime-js.coffee][1] ([mime-js.js][2])
-
-  [1]: https://github.com/ikr0m/mime-js/blob/master/app/assets/javascripts/mime-js.coffee
-  [2]: https://github.com/ikr0m/mime-js/blob/master/public/javascripts/mime-js.js
