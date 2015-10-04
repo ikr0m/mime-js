@@ -21,6 +21,7 @@ Mime object has two public methods: Mime.toMimeTxt() and Mime.toMimeObj(). See s
 ```javascript  
 var originalMail = {
     "to": "email1@example.com",
+    "cc": "email2@example.com",
     "subject": "Today is rainy",
     "fromName": "John Smith",
     "from": "john.smith@mail.com",
@@ -47,6 +48,7 @@ Message-ID: <i2ozrb4lgrgrpb9hp8wrf4n449xjemi@mail.your-domain.com>
 Subject: =?UTF-8?B?VG9kYXkgaXMgcmFpbnk=?=
 From: =?UTF-8?B?Sm9obiBTbWl0aA==?= <john.smith@mail.com>
 To: email1@example.com
+Cc: email2@example.com
 Content-Type: multipart/mixed; boundary=qr7c8bjwkc81if6r9xpqmra8rrudi
 
 --qr7c8bjwkc81if6r9xpqmra8rrudi
@@ -77,7 +79,7 @@ MimeObj
 -------
 
 ```javascript
-{"html":"<div>Sample body text</div>","text":"Sample body text","attaches":[],"innerMsgs":[],"to":"email1@example.com","from":"John Smith <john.smith@mail.com>","subject":"Today is rainy"}
+{"html":"<div>Sample body text</div>","text":"Sample body text","attaches":[],"innerMsgs":[],"to":"email1@example.com","cc":"email2@example.com","from":"John Smith <john.smith@mail.com>","subject":"Today is rainy"}
 ```
 
 ------------------------------------------------------------------
