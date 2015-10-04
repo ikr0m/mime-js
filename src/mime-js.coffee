@@ -13,6 +13,7 @@ window.Mime = do ->
 
 #  var mail = {
 #    "to": "email1@example.com, email2@example.com",
+#    "cc": "email3@example.com, email4@example.com",
 #    "subject": "Today is rainy",
 #    "fromName": "John Smith",
 #    "from": "john.smith@mail.com",
@@ -124,6 +125,7 @@ window.Mime = do ->
           '\nSubject: ' + subject +
           '\nFrom: ' + mailFromName + ' <' + mail.from + '>' +
           '\nTo: ' + mail.to +
+          '\nCc: ' + mail.cc +
           '\nContent-Type: multipart/mixed; boundary=' + boundary +
           '\n\n--' + boundary + related
 
@@ -222,12 +224,14 @@ window.Mime = do ->
 
     subject = getValidStr((/\r\nSubject: (.*)\r\n/g).exec(rawHeaders))
     to = getValidStr((/\r\nTo: (.*)\r\n/g).exec(rawHeaders))
+    cc = getValidStr((/\r\nCc: (.*)\r\n/g).exec(rawHeaders))
     from = getValidStr((/\r\nFrom: (.*)\r\n/g).exec(rawHeaders))
 
     {
     messageParts: messageParts
     subject: subject
     to: to
+    cc: cc
     from: from
     }
 
@@ -333,6 +337,7 @@ window.Mime = do ->
       attaches: []
       innerMsgs: []
       to: _util.decodeMimeWords(rawMailObj.to)
+      cc: _util.decodeMimeWords(rawMailObj.cc)
       from: _util.decodeMimeWords rawMailObj.from
       subject: _util.decodeMimeWords rawMailObj.subject
 

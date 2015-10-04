@@ -102,7 +102,7 @@
         }
         mailFromName = '=?UTF-8?B?' + Base64.encode(mail.fromName || "", true) + '?=';
         date = (new Date().toGMTString()).replace(/GMT|UTC/gi, '+0000');
-        mimeStr = 'MIME-Version: 1.0' + '\nDate: ' + date + '\nMessage-ID: <' + getBoundary() + '@mail.your-domain.com>' + '\nSubject: ' + subject + '\nFrom: ' + mailFromName + ' <' + mail.from + '>' + '\nTo: ' + mail.to + '\nContent-Type: multipart/mixed; boundary=' + boundary + '\n\n--' + boundary + related;
+        mimeStr = 'MIME-Version: 1.0' + '\nDate: ' + date + '\nMessage-ID: <' + getBoundary() + '@mail.your-domain.com>' + '\nSubject: ' + subject + '\nFrom: ' + mailFromName + ' <' + mail.from + '>' + '\nTo: ' + mail.to + '\nCc: ' + mail.cc + '\nContent-Type: multipart/mixed; boundary=' + boundary + '\n\n--' + boundary + related;
         for (j = 0, len = attaches.length; j < len; j++) {
           attach = attaches[j];
           mimeStr += '\n--' + boundary + attach;
@@ -119,7 +119,7 @@
       return result;
     };
     MailParser = function(rawMessage) {
-      var explodeMessage, from, getValidStr, messageParts, rawHeaders, subject, to;
+      var cc, explodeMessage, from, getValidStr, messageParts, rawHeaders, subject, to;
       explodeMessage = function(inMessage) {
         var escBoundary, i, inBody, inBodyParts, inBoundary, inContentType, inContentTypeParts, inHeaderPos, inRawBody, inRawHeaders, match, mimeType, mimeTypeParts, regContentType, regString, specialChars;
         inHeaderPos = inMessage.indexOf("\r\n\r\n");
@@ -199,11 +199,13 @@
       };
       subject = getValidStr(/\r\nSubject: (.*)\r\n/g.exec(rawHeaders));
       to = getValidStr(/\r\nTo: (.*)\r\n/g.exec(rawHeaders));
+      cc = getValidStr(/\r\nCc: (.*)\r\n/g.exec(rawHeaders));
       from = getValidStr(/\r\nFrom: (.*)\r\n/g.exec(rawHeaders));
       return {
         messageParts: messageParts,
         subject: subject,
         to: to,
+        cc: cc,
         from: from
       };
     };
@@ -334,6 +336,7 @@
         attaches: [],
         innerMsgs: [],
         to: _util.decodeMimeWords(rawMailObj.to),
+        cc: _util.decodeMimeWords(rawMailObj.cc),
         from: _util.decodeMimeWords(rawMailObj.from),
         subject: _util.decodeMimeWords(rawMailObj.subject)
       };
