@@ -21,7 +21,7 @@ window.Mime = do ->
 #    "cids": [],
 #    "attaches" : []
 #  }
-  toMimeTxt = (mail) ->
+  toMimeTxt = (mail, txtOnly) ->
     linkify = (inputText) ->
       #URLs starting with http://, https://, or ftp://
       replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim
@@ -136,10 +136,14 @@ window.Mime = do ->
 
 
     plain = createPlain mail.body
-    htm = createHtml mail
-    alternative = createAlternative plain, htm
-    cids = createCids mail.cids
-    related = createRelated alternative, cids
+    if txtOnly
+      related = plain
+    else
+      htm = createHtml mail
+      alternative = createAlternative plain, htm
+      cids = createCids mail.cids
+      related = createRelated alternative, cids
+
     attaches = createAttaches mail.attaches
 
     result = createMixed(related, attaches)

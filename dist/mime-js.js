@@ -10,7 +10,7 @@
 (function() {
   window.Mime = (function() {
     var MailParser, _util, buildMimeObj, toMimeObj, toMimeTxt;
-    toMimeTxt = function(mail) {
+    toMimeTxt = function(mail, txtOnly) {
       var alternative, attaches, cids, createAlternative, createAttaches, createCids, createHtml, createMixed, createPlain, createRelated, getBoundary, htm, linkify, plain, related, result;
       linkify = function(inputText) {
         var replacePattern1, replacePattern2, replacePattern3, replacedText;
@@ -110,10 +110,14 @@
         return (mimeStr + '\n--' + boundary + '--').replace(/\n/g, '\r\n');
       };
       plain = createPlain(mail.body);
-      htm = createHtml(mail);
-      alternative = createAlternative(plain, htm);
-      cids = createCids(mail.cids);
-      related = createRelated(alternative, cids);
+      if (txtOnly) {
+        related = plain;
+      } else {
+        htm = createHtml(mail);
+        alternative = createAlternative(plain, htm);
+        cids = createCids(mail.cids);
+        related = createRelated(alternative, cids);
+      }
       attaches = createAttaches(mail.attaches);
       result = createMixed(related, attaches);
       return result;
