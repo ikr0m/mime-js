@@ -124,8 +124,8 @@ window.Mime = do ->
           '\nMessage-ID: <' + getBoundary() + '@mail.your-domain.com>' +
           '\nSubject: ' + subject +
           '\nFrom: ' + mailFromName + ' <' + mail.from + '>' +
-          '\nTo: ' + mail.to +
-          '\nCc: ' + mail.cc +
+          (if mail.to then '\nTo: ' + mail.to else '') +
+          (if mail.cc then '\nCc: ' + mail.cc else '') +
           '\nContent-Type: multipart/mixed; boundary=' + boundary +
           '\n\n--' + boundary + related
 

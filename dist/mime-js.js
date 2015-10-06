@@ -102,7 +102,7 @@
         }
         mailFromName = '=?UTF-8?B?' + Base64.encode(mail.fromName || "", true) + '?=';
         date = (new Date().toGMTString()).replace(/GMT|UTC/gi, '+0000');
-        mimeStr = 'MIME-Version: 1.0' + '\nDate: ' + date + '\nMessage-ID: <' + getBoundary() + '@mail.your-domain.com>' + '\nSubject: ' + subject + '\nFrom: ' + mailFromName + ' <' + mail.from + '>' + '\nTo: ' + mail.to + '\nCc: ' + mail.cc + '\nContent-Type: multipart/mixed; boundary=' + boundary + '\n\n--' + boundary + related;
+        mimeStr = 'MIME-Version: 1.0' + '\nDate: ' + date + '\nMessage-ID: <' + getBoundary() + '@mail.your-domain.com>' + '\nSubject: ' + subject + '\nFrom: ' + mailFromName + ' <' + mail.from + '>' + (mail.to ? '\nTo: ' + mail.to : '') + (mail.cc ? '\nCc: ' + mail.cc : '') + '\nContent-Type: multipart/mixed; boundary=' + boundary + '\n\n--' + boundary + related;
         for (j = 0, len = attaches.length; j < len; j++) {
           attach = attaches[j];
           mimeStr += '\n--' + boundary + attach;
@@ -193,7 +193,7 @@
       messageParts = "";
       try {
         messageParts = explodeMessage(rawMessage);
-      } catch (_error) {}
+      } catch(_error) {}
       rawHeaders = messageParts.rawHeaders;
       getValidStr = function(arr) {
         if (arr == null) {
@@ -454,7 +454,7 @@
         } else {
           console.log("Warning: mime type isn't supported! mime=" + mimeType);
         }
-      } catch (_error) {
+      } catch(_error) {
         err = _error;
         throw new Error(err);
       }
